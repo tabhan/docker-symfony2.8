@@ -1,0 +1,29 @@
+version: "2"
+services:
+    mysql:
+        image: mysql:5.7
+        container_name: mysqldb_symfony2
+        working_dir: /project
+        volumes:
+          - .:/project
+        ports:
+            - "3306:3306"
+        expose:
+            - "3306"
+        environment:
+            - MYSQL_ROOT_PASSWORD=dbrootpw
+            - MYSQL_DATABASE=docker_symfony2
+            - MYSQL_USER=dbuser
+            - MYSQL_PASSWORD=dbpw
+    site:
+        build: docker
+        container_name: myproject_symfony2
+        working_dir: /project
+        volumes:
+          - .:/project
+        ports:
+            - "80:80"
+        expose:
+            - "80"
+        depends_on:
+            - mysql
