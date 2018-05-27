@@ -1,3 +1,0 @@
-tabhan_test_homepage:
-    path:     /
-    defaults: { _controller: TabhanTestBundle:Default:index }
