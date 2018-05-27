@@ -9,19 +9,19 @@
 namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
-class LuckyController
+class LuckyController extends Controller
 {
     /**
-     * @Route("/lucky/number", name="lucky_number")
+     * @Route("/lucky/number/{max}", name="lucky_number")
+     * @param $max int
      */
-    public function numberAction()
+    public function numberAction($max = 100)
     {
-        $number = mt_rand(0, 100);
+        $number = mt_rand(0, $max);
 
-        return new Response(
-            '<html><body>Lucky number: '.$number.'</body></html>'
-        );
+        return $this->render('default/number.html.twig', ['number' => $number]);
     }
 }
